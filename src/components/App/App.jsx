@@ -18,7 +18,11 @@ export function App() {
   const formSubmit = ({ name, number }) => {
     const contact = { id: nanoid(), name, number };
 
-    if (contacts.some(e => e.name === name)) {
+    if (
+      contacts.some(
+        e => e.name.toLowerCase().trim() === name.toLowerCase().trim()
+      )
+    ) {
       return alert(`${name} is already in contacts!`);
     }
 
@@ -41,7 +45,7 @@ export function App() {
 
   useEffect(() => {
     window.localStorage.setItem('contacts', JSON.stringify(contacts));
-  });
+  }, [contacts]);
 
   return (
     <div>
